@@ -1,36 +1,32 @@
 <template>
   <div>
-    <input v-model="todos" placeholder="insert to-do"><button v-on:click="passTodo">Add</button>
+    <b>TO-DO List</b>
+    <br/>
+
+    <input
+        v-model="todo"
+        placeholder="insert to-do"
+    >
+
+    <button @click="passTodo">
+      Add
+    </button>
   </div>
 </template>
 
 <script>
-
-console.log('input call')
-
 export default {
   name: 'input-component',
-  data: function() {
+  data: () => {
     return {
-      todos: void 0
-    }
-  },
-  props: {
-    todo: {
-      type: String,
-      default: void 0
+      todo: void 0
     }
   },
   methods: {
     passTodo () {
-      this.$emit('todo', this.todos)
-      this.todos = ''
+      this.$emit('on-input-todo', this.todo)
+      this.todo = void 0
     }
   }
 }
-
 </script>
-
-<style scoped>
-
-</style>

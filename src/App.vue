@@ -1,20 +1,29 @@
 <template>
   <div id="app">
-    <b>TO-DO List</b>
-
-    <list-component></list-component>
+    <input-component @on-input-todo="onInputTodo"/>
+    <list-component :todo-list="todoList"/>
   </div>
 </template>
 
 <script>
 import ListComponent from './components/ListComponent.vue'
+import InputComponent from './components/InputComponent'
 
 export default {
   name: 'App',
-  components: { ListComponent }
+  components: {
+    InputComponent,
+    ListComponent
+  },
+  data () {
+    return {
+      todoList: []
+    }
+  },
+  methods: {
+    onInputTodo (value) {
+      this.todoList.push(value)
+    }
+  }
 }
 </script>
-
-<style>
-
-</style>
