@@ -15,6 +15,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'input-component',
   data: () => {
@@ -22,10 +23,13 @@ export default {
       todo: void 0
     }
   },
+  props: {
+    todoList: Array
+  },
   methods: {
     passTodo () {
-      this.$emit('on-input-todo', this.todo)
-      this.todo = void 0
+        this.$emit('on-input-todo', this.todo)
+        this.todo = void 0
     }
   }
 }

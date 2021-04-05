@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <input-component @on-input-todo="onInputTodo"/>
+    <input-component @on-input-todo="onInputTodo" />
     <list-component :todo-list="todoList"/>
   </div>
 </template>
 
 <script>
 import ListComponent from './components/ListComponent.vue'
-import InputComponent from './components/InputComponent'
+import InputComponent from './components/InputComponent.vue'
 
 export default {
   name: 'App',
@@ -22,7 +22,11 @@ export default {
   },
   methods: {
     onInputTodo (value) {
-      this.todoList.push(value)
+      let todoObj = {}
+      todoObj.txt = value
+      todoObj.use = false
+
+      this.todoList.push(todoObj)
     }
   }
 }
