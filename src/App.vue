@@ -24,7 +24,7 @@ export default {
     onInputTodo (value) {
       let todoObj = {}
       todoObj.txt = value
-      todoObj.use = false
+      todoObj.seen = false
 
       this.todoList.push(todoObj)
     }

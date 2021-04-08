@@ -23,9 +23,6 @@ export default {
       todo: void 0
     }
   },
-  props: {
-    todoList: Array
-  },
   methods: {
     passTodo () {
         this.$emit('on-input-todo', this.todo)
