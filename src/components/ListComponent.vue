@@ -4,17 +4,43 @@
         v-for="(item, index) in todoList"
         :key="index"
     >
-      <input type="checkbox" v-model="item.isCheck" v-if="!item.seen">
-      <span :class="{ checkedColor : item.isCheck }" v-if="!item.seen">
+      <input
+          v-show="!item.seen"
+          v-model="item.isCheck"
+          type="checkbox"
+      >
+      <span
+          v-show="!item.seen"
+          :class="{ 'checkedColor' : item.isCheck }"
+      >
         {{ item.txt }}
       </span>
 
-      <input v-if="item.seen" v-model="item.txt">
+      <input
+          v-show="item.seen"
+          v-model="item.txt"
+      >
 
-      <button @click="updateTodo(index)" v-if="!item.seen">Update</button>
-      <button @click="deleteTodo(index)" v-if="!item.seen">Delete</button>
+      <button
+          v-show="!item.seen"
+          @click="updateTodo(index)"
+      >
+        Update
+      </button>
 
-      <button @click="applyTodo(index)" v-if="item.seen">Apply</button>
+      <button
+          v-show="!item.seen"
+          @click="deleteTodo(index)"
+      >
+        Delete
+      </button>
+
+      <button
+          v-show="item.seen"
+          @click="applyTodo(index)"
+      >
+        Apply
+      </button>
     </li>
   </ul>
 </template>
@@ -27,13 +53,13 @@ export default {
     todoList: Array
   },
   methods: {
-    updateTodo (index) {
+    updateTodo(index) {
       this.todoList[index].seen = true
     },
-    applyTodo (index) {
+    applyTodo(index) {
       this.todoList[index].seen = false
     },
-    deleteTodo (index) {
+    deleteTodo(index) {
       this.todoList.splice(index, 1);
     }
   }
