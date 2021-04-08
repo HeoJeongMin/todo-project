@@ -25,6 +25,7 @@ export default {
       let todoObj = {}
       todoObj.txt = value
       todoObj.seen = false
+      todoObj.isCheck = false
 
       this.todoList.push(todoObj)
     }
