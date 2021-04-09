@@ -1,34 +1,29 @@
 <template>
   <div id="app">
-    <input-component @on-input-todo="onInputTodo" />
-    <list-component :todo-list="todoList"/>
+    <div id="nav">
+      <router-link to="/todo">추가 페이지</router-link> |
+      <router-link to="/todo/list">목록 페이지</router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
 
-<script>
-import ListComponent from './components/ListComponent.vue'
-import InputComponent from './components/InputComponent.vue'
-
-export default {
-  name: 'App',
-  components: {
-    InputComponent,
-    ListComponent
-  },
-  data () {
-    return {
-      todoList: []
-    }
-  },
-  methods: {
-    onInputTodo (value) {
-      let todoObj = {}
-      todoObj.txt = value
-      todoObj.seen = false
-      todoObj.isCheck = false
-
-      this.todoList.push(todoObj)
-    }
-  }
+<style>
+#app {
+  text-align: center;
+  color: #2c3e50;
 }
-</script>
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>
