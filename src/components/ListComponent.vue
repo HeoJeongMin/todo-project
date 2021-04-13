@@ -9,6 +9,7 @@
           v-model="item.isCheck"
           type="checkbox"
       >
+      <b v-show="!inputSeen">{{ index + 1 }}</b>
       <span
           v-show="!item.seen"
           :class="{ 'checkedColor' : item.isCheck }"
@@ -90,5 +91,8 @@ button {
 .checkedColor {
   color: green;
   text-decoration-line: line-through;
+}
+b {
+  margin-right: 5px;
 }
 </style>
