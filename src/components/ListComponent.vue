@@ -63,6 +63,17 @@ export default {
     deleteTodo(index) {
       this.todoList.splice(index, 1);
     }
+  },
+  watch: {
+    // todoList 값의 변화를 감지한다.
+    todoList: {
+      deep: true,   // 깊은 탐색 감지, 배열 내부의 객체 속성의 변화까지 감지한다.
+      handler (newValue, oldValue) {
+        console.log(oldValue)
+        // 로컬 스토리지에 저장
+        localStorage.setItem('todoList', JSON.stringify(newValue))
+      }
+    }
   }
 }
 </script>
