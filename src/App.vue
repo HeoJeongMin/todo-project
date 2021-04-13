@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/todo">추가 페이지</router-link> |
-      <router-link to="/todo/list">목록 페이지</router-link>
+      <router-link to="/list">목록 페이지</router-link>
     </div>
     <router-view/>
   </div>

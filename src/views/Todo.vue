@@ -1,7 +1,18 @@
 <template>
   <div id="todo">
-    <input-component @on-input-todo="onInputTodo" />
-    <list-component :todo-list="todoList" />
+    <b>{{ todoTitle }}</b>
+    <br/>
+
+    <input-component 
+      @on-input-todo="onInputTodo" 
+      v-show="inputSeen" 
+    />
+
+    <list-component 
+      :todo-list="todoList" 
+      :input-seen="inputSeen" 
+    />
+
   </div>
 </template>
 
@@ -17,7 +28,9 @@ export default {
   },
   data () {
     return {
-      todoList: []
+      todoList: [],
+      todoTitle: void 0,
+      inputSeen: true
     }
   },
   methods: {
@@ -28,6 +41,17 @@ export default {
       todoObj.isCheck = false
 
       this.todoList.push(todoObj)
+    }
+  },
+  watch: {
+    '$route' (to) {
+      if(to.name === 'Todo') {
+        this.todoTitle = 'TO-DO App'
+        this.inputSeen = true
+      } else if(to.name === 'List') {
+        this.todoTitle = 'TO-DO List'
+        this.inputSeen = false
+      }
     }
   }
 }

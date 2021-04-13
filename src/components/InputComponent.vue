@@ -1,8 +1,5 @@
 <template>
   <div>
-    <b>TO-DO List</b>
-    <br/>
-
     <input
         v-model="todo"
         placeholder="insert to-do"

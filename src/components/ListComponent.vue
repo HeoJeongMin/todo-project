@@ -5,7 +5,7 @@
         :key="index"
     >
       <input
-          v-show="!item.seen"
+          v-show="!item.seen && inputSeen"
           v-model="item.isCheck"
           type="checkbox"
       >
@@ -17,26 +17,26 @@
       </span>
 
       <input
-          v-show="item.seen"
+          v-show="item.seen && inputSeen"
           v-model="item.txt"
       >
 
       <button
-          v-show="!item.seen"
+          v-show="!item.seen && inputSeen"
           @click="updateTodo(index)"
       >
         Update
       </button>
 
       <button
-          v-show="!item.seen"
+          v-show="!item.seen && inputSeen"
           @click="deleteTodo(index)"
       >
         Delete
       </button>
 
       <button
-          v-show="item.seen"
+          v-show="item.seen && inputSeen"
           @click="applyTodo(index)"
       >
         Apply
@@ -50,7 +50,8 @@
 export default {
   name: 'list-component',
   props: {
-    todoList: Array
+    todoList: Array,
+    inputSeen: Boolean
   },
   methods: {
     updateTodo(index) {
