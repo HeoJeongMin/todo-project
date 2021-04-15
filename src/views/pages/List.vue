@@ -24,7 +24,9 @@
     },
     created () {
       // 최초 List 페이지가 생성될 때 localStorage의 값을 삽입한다.
-      this.readOnlyTodoList = JSON.parse(localStorage.getItem('todoList'))
+      // this.readOnlyTodoList = JSON.parse(localStorage.getItem('todoList'))
+      console.log('call')
+      this.readOnlyTodoList = JSON.parse(this.$store.getters.getTodoList)
     }
   }
 </script>

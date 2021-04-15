@@ -31,7 +31,7 @@
     },
     created () {
       // 최초 localStorage에 값이 있으면 값을 유지한다.
-      const localData = JSON.parse(localStorage.getItem('todoList'))
+      const localData = JSON.parse(this.$store.getters.getTodoList)
 
       if (localData) {
         this.todoList = localData
