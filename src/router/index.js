@@ -37,7 +37,7 @@ function generateRoute (path) {
 // 동적으로 생성되는 라우터는 이 routes에 추가된다.
 // e.g) { path: '/Todo', component: Todo }
 const routes = [
-  { name: 'todo', path: '/', component: loadPageComponent('Todo') }
+  { name: 'rootTodo', path: '/', component: loadPageComponent('Todo') }
 ]
 
 views.forEach(view => routes.push(generateRoute(view)))

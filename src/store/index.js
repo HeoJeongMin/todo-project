@@ -3,31 +3,37 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const storedTodo = localStorage.getItem('todoList')
+
+const store = new Vuex.Store({
   state: {
-    message: 'Hello!!!!',
-    todoList: localStorage.getItem('todoList')
+    todoList: storedTodo === null ? [] : JSON.parse(storedTodo)
   },
   mutations: {
-    changeMessage (state, newMsg) {
-      state.message = newMsg
+    mutationTodo (state, todo) {
+      state.todoList.push({
+        txt: todo,
+        seen: false,
+        isCheck: false
+      })
+      localStorage.setItem('todoList', JSON.stringify(state.todoList))
+    },
+    updateTodo (state, payload) {
+      state.todoList = payload
+      localStorage.setItem('todoList', JSON.stringify(payload))
     }
   },
-  actions: {
-    callMutation ({ state, commit }, { newMsg }) {
-      console.log(state)
-      commit('changeMessage', newMsg)
-    }
-  },
+  // actions: {
+  //   callMutation ({ state, commit}, { newTodo }) {
+  //     console.log(state)
+  //     commit('appendTodo', newTodo)
+  //   }
+  // },
   getters: {
-    // getMsg (state) {
-    //   return `${state.message} => Length : ${state.message.length}`
-    // },
-    getTodoList (state) {
-      console.log(state)
-      return `${state.todoList}`
-    }
+    // searchTodo: state => {
+    //   return state.todoList.filter()
+    // }
   },
-  modules: {
-  }
 })
+
+export default store
