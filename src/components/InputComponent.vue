@@ -5,7 +5,10 @@
         placeholder="insert to-do"
     >
 
-    <button v-show='!listFlag' @click="addTodo">
+    <button
+        v-show='!listFlag'
+        @click="onAddTodo"
+    >
       <span>Add</span>
     </button>
 
@@ -17,7 +20,11 @@
 
 <script>
 
-// import { mapMutations } from 'vuex'
+// namespace utils
+import { createNamespacedHelpers } from 'vuex'
+
+// helper
+const todoStoreHelper = createNamespacedHelpers('todoStore')
 
 export default {
   name: 'input-component',
@@ -31,12 +38,11 @@ export default {
     }
   },
   methods: {
-    // ...mapMutations([
-    //   'addTodo'
-    // ])
-    // ,
-    addTodo () {
-      this.$store.commit('mutationTodo', this.todo)
+    ...todoStoreHelper.mapMutations([
+      'addTodo'
+    ]),
+    onAddTodo () {
+      this.addTodo(this.todo)
       this.todo = void 0
     }
   }
