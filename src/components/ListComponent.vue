@@ -31,7 +31,7 @@
 
       <button
           v-show="!item.seen && inputSeen"
-          @click="deleteTodo(index)"
+          @click="onDeleteTodo(index)"
       >
         Delete
       </button>
@@ -48,7 +48,11 @@
 
 <script>
 
-import { mapState } from 'vuex'
+// namespace utils
+import { createNamespacedHelpers } from 'vuex'
+
+// helper
+const todoStoreHelper = createNamespacedHelpers('todoStore')
 
 export default {
   name: 'list-component',
@@ -56,27 +60,23 @@ export default {
     inputSeen: Boolean
   },
   computed: {
-    ...mapState({
-      todoList: state => state.todoList
-    })
+    ...todoStoreHelper.mapState([
+      'todoList'
+    ])
   },
   methods: {
-    updateTodo(index) {
-      this.todoList[index].seen = true
+    ...todoStoreHelper.mapMutations([
+      'changeSeen',
+      'deleteTodo'
+    ]),
+    updateTodo (index) {
+      this.changeSeen({ index, value: true })
     },
-    applyTodo(index) {
-      this.todoList[index].seen = false
+    applyTodo (index) {
+      this.changeSeen({ index, value: false })
     },
-    deleteTodo(index) {
-      this.todoList.splice(index, 1);
-    }
-  },
-  watch: {
-    todoList: {
-      deep: true,
-      handler (newValue) {
-        this.$store.commit('updateTodo', newValue)
-      }
+    onDeleteTodo (index) {
+      this.deleteTodo(index)
     }
   }
 }
