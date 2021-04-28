@@ -14,7 +14,7 @@
           v-show="!item.seen"
           :class="{ 'checkedColor' : item.isCheck }"
       >
-        {{ item.txt }}
+        {{ item.title }}
       </span>
 
       <input

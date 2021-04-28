@@ -5,15 +5,12 @@
         placeholder="insert to-do"
     >
 
-    <button
-        v-show='!listFlag'
-        @click="onAddTodo"
-    >
+    <button @click="onAddTodo">
       <span>Add</span>
     </button>
 
-    <button v-show='listFlag'>
-      <span>Search</span>
+    <button @click="callTodoList">
+      <span>Call</span>
     </button>
   </div>
 </template>
@@ -28,22 +25,24 @@ const todoStoreHelper = createNamespacedHelpers('todoStore')
 
 export default {
   name: 'input-component',
-  props: {
-    listFlag: Boolean
-  },
   data: () => {
     return {
-      todo: void 0,
-      btnTxt: void 0
+      todo: void 0
     }
   },
   methods: {
     ...todoStoreHelper.mapMutations([
       'addTodo'
     ]),
+    ...todoStoreHelper.mapActions([
+      'fetchTodoList'
+    ]),
     onAddTodo () {
       this.addTodo(this.todo)
       this.todo = void 0
+    },
+    callTodoList () {
+      this.fetchTodoList()
     }
   }
 }

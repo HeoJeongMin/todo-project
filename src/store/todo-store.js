@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 // state
 const state = {
   todoList: []  // 초기값은 지정
@@ -22,11 +24,24 @@ const mutations = {
   // seen 변경
   changeSeen (state, { index, value }) {
     state.todoList[index].seen = value
+  },
+
+  getTodoList (state, todo) {
+    state.todoList = todo.data
   }
 }
 
 // actions
-const actions = {}
+const actions = {
+  fetchTodoList ({ commit }) {
+    axios
+      .get('https://jsonplaceholder.typicode.com/todos')
+      .then(response => {
+        commit('getTodoList', response)
+      })
+
+  }
+}
 
 // getters
 const getters = {}
