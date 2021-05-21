@@ -10,9 +10,9 @@ const mutations = {
   // todo 추가
   addTodo (state, todo) {
     state.todoList.push({
-      txt: todo,
+      title: todo,
       seen: false,
-      isCheck: false
+      completed: false
     })
   },
 
@@ -27,7 +27,7 @@ const mutations = {
   },
 
   getTodoList (state, todo) {
-    state.todoList = todo.data
+    state.todoList = todo
   }
 }
 
@@ -37,9 +37,10 @@ const actions = {
     axios
       .get('https://jsonplaceholder.typicode.com/todos')
       .then(response => {
-        commit('getTodoList', response)
+        const todo = response.data
+        todo.map(value => ( value.seen = false))
+        commit('getTodoList', todo)
       })
-
   }
 }
 

@@ -6,20 +6,20 @@
     >
       <input
           v-show="!item.seen && inputSeen"
-          v-model="item.isCheck"
+          v-model="item.completed"
           type="checkbox"
       >
       <b v-show="!inputSeen">{{ index + 1 }}</b>
       <span
           v-show="!item.seen"
-          :class="{ 'checkedColor' : item.isCheck }"
+          :class="{ 'checkedColor' : item.completed }"
       >
         {{ item.title }}
       </span>
 
       <input
           v-show="item.seen && inputSeen"
-          v-model="item.txt"
+          v-model="item.title"
       >
 
       <button
@@ -59,6 +59,9 @@ export default {
   props: {
     inputSeen: Boolean
   },
+  created () {
+    this.fetchTodoList()
+  },
   computed: {
     ...todoStoreHelper.mapState([
       'todoList'
@@ -68,6 +71,9 @@ export default {
     ...todoStoreHelper.mapMutations([
       'changeSeen',
       'deleteTodo'
+    ]),
+    ...todoStoreHelper.mapActions([
+      'fetchTodoList'
     ]),
     updateTodo (index) {
       this.changeSeen({ index, value: true })

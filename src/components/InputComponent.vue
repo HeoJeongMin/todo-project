@@ -9,9 +9,6 @@
       <span>Add</span>
     </button>
 
-    <button @click="callTodoList">
-      <span>Call</span>
-    </button>
   </div>
 </template>
 
@@ -34,15 +31,9 @@ export default {
     ...todoStoreHelper.mapMutations([
       'addTodo'
     ]),
-    ...todoStoreHelper.mapActions([
-      'fetchTodoList'
-    ]),
     onAddTodo () {
       this.addTodo(this.todo)
       this.todo = void 0
-    },
-    callTodoList () {
-      this.fetchTodoList()
     }
   }
 }
